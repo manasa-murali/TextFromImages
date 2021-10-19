@@ -20,19 +20,19 @@ constructor(
     private val dispatcher: CoroutineDispatcher = Dispatchers.IO
 ) : ViewModel() {
 
-    private val mutableStateFlow = MutableStateFlow(AppState())
+    private val mutableStateFlow = MutableStateFlow(AppState(uiState = UIState.Initial))
     val dataFlow = mutableStateFlow.asStateFlow()
 
 
     fun convertToBitmap(imageProxy: ImageProxy) {
-        val currentState = dataFlow.value
+        val currentState = mutableStateFlow.value
         viewModelScope.launch(dispatcher) {
             val bitmap = cameraRepository.convertImageToBitmap(imageProxy)
             if (bitmap != null) {
                 imageProxy.close()
                 mutableStateFlow.emit(
                     currentState.copy(
-                        uiState = UIState.Success(bitmap)
+                        uiState = (UIState.Success(bitmap))
                     )
                 )
 

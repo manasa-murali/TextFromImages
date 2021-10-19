@@ -18,5 +18,14 @@
         android:id="@+id/cameraFragment"
         android:name="com.example.textfromimages.view.CameraFragment"
         android:label="fragment_camera"
-        tools:layout="@layout/fragment_camera" />
+        tools:layout="@layout/fragment_camera">
+        <action
+            android:id="@+id/action_cameraFragment_to_textRecognitionFragment"
+            app:destination="@id/textRecognitionFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/textRecognitionFragment"
+        android:name="com.example.textfromimages.TextRecognitionFragment"
+        android:label="fragment_text_recognition"
+        tools:layout="@layout/fragment_text_recognition" />
 </navigation>
